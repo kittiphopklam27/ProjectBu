@@ -5,7 +5,7 @@ const User = require("../models/User");
 const router = express.Router();
 
 // Login Route
-router.get("/login", (req, res) => {
+router.get("/", (req, res) => {
   res.render("login");
 });
 
