@@ -46,7 +46,7 @@ app.use(
 // Routes
 app.use('/', require('./routes/home'));
 app.use('learning', require('./routes/learning'));
-app.use('/login', require('./routes/login'));
+app.use('/login', require('./routes/auth'));
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

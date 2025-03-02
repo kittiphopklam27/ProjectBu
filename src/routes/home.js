@@ -4,7 +4,7 @@ const User = require("../models/User");
 
 const router = express.Router();
 
-app.get("/", async (req, res) => {
+router.get("/", async (req, res) => {
   if (!req.session.userId) {
     return res.redirect("/login");
   }
