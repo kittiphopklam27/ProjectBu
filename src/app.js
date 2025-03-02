@@ -45,7 +45,7 @@ app.use(
 
 // Routes
 app.use('/', require('./routes/home'));
-app.use('learning', require('./routes/learning'));
+app.use('/learning', require('./routes/learning'));
 app.use('/login', require('./routes/auth'));
 
 app.listen(port, () => {
