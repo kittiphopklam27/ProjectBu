@@ -10,7 +10,7 @@ app.get("/", async (req, res) => {
   }
 
   const user = await User.findByPk(req.session.userId);
-  res.render("dashboard", { username: user.username });
+  res.render("home", { username: user.username });
 });
 
 module.exports = router;
