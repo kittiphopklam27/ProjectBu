@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
   res.render("login");
 });
 
-router.post("/login", async (req, res) => {
+router.post("/", async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ where: { username } });
 
