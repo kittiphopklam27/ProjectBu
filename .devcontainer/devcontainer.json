@@ -1,5 +1,6 @@
 {
-    "name": "static",
+    "name": "PHP",
+    "image": "mcr.microsoft.com/devcontainers/php:latest",
     "customizations": {
         "vscode": {
             "settings": {
@@ -8,10 +9,13 @@
             "extensions": [
                 "ms-azuretools.vscode-docker",
                 "alefragnani.bookmarks",
-                "eamodio.gitlens",
-                "streetsidesoftware.code-spell-checker",
-                "ritwickdey.LiveServer"
+                "eamodio.gitlens"
             ]
         }
-    }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:1": {},
+        "ghcr.io/devcontainers/features/docker-in-docker:1": {}
+    },
+    "postCreateCommand": "composer install"
 }
