@@ -1,38 +1,51 @@
 require("dotenv").config();
 
-const express = require('express');
+const express = require("express");
+const fs = require("fs");
 const session = require("express-session");
-const bodyParser = require('body-parser');
-const path = require('path');
+const bodyParser = require("body-parser");
+const path = require("path");
 
-// Function
-const { ensureDatabaseExists } = require('./utils/fileHandler');
+// Function imports
+const { ensureDatabaseExists } = require("./utils/fileHandler");
+const { addUser } = require("./utils/userHandler");
 
 // Define the file path (data/users.sqlite)
-const filePath = path.join(__dirname, 'data', 'users.sqlite');
+const filePath = path.resolve("data", "users.sqlite");
 
-const  tableName = `user`;
-const tableSchema = `
-  user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-  user_name VARCHAR(255) NOT NULL,
-  user_password VARCHAR(255) NOT NULL,
-  user_role VARCHAR(50) NOT NULL,
-  email VARCHAR(255) UNIQUE NOT NULL,
-  user_created_time DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  user_updated_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-`;
+// Function to check if the database file exists
+function fileExists(filePath) {
+  return fs.existsSync(filePath);
+}
 
-// Ensure the file exists
-ensureDatabaseExists(filePath, tableName, tableSchema);
+// Ensure the database and table exist before adding users
+if (fileExists(filePath)) {
+  console.log("Database file exists. Proceeding with user setup...");
+} else {
+  // Ensure the database and table exist before adding users
+  ensureDatabaseExists(filePath)
+  .then(() => {
+    return Promise.all([
+      addUser("admin", "1234", "admin", "admin@example.com"),
+      addUser("user", "1234", "user", "user@example.com"),
+    ]);
+  })
+  .then(() => {
+    console.log("Default users added.");
+  })
+  .catch((err) => {
+    console.error("Database setup error:", err);
+  });
+}
 
 // App resources
 const app = express();
 const port = process.env.PORT || 3000;
 
 // Middleware
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Session
 app.use(
@@ -44,9 +57,9 @@ app.use(
 );
 
 // Routes
-app.use('/', require('./routes/home'));
-app.use('/learning', require('./routes/learning'));
-app.use('/login', require('./routes/auth'));
+app.use("/", require("./routes/home"));
+app.use("/learning", require("./routes/learning"));
+app.use("/login", require("./routes/auth"));
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
