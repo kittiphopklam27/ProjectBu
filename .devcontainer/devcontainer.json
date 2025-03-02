@@ -1,6 +1,9 @@
 {
-    "name": "PHP",
-    "image": "mcr.microsoft.com/devcontainers/php:latest",
+    "name": "Npm",
+    "features": {
+      "ghcr.io/devcontainers-contrib/features/jshint:2": {}
+    },
+    "postCreateCommand": "cd src && npm install",
     "customizations": {
         "vscode": {
             "settings": {
@@ -9,13 +12,11 @@
             "extensions": [
                 "ms-azuretools.vscode-docker",
                 "alefragnani.bookmarks",
-                "eamodio.gitlens"
+                "eamodio.gitlens",
+                "dbaeumer.vscode-eslint",
+                "christian-kohler.npm-intellisense",
+                "christian-kohler.path-intellisense"
             ]
         }
-    },
-    "features": {
-        "ghcr.io/devcontainers/features/common-utils:1": {},
-        "ghcr.io/devcontainers/features/docker-in-docker:1": {}
-    },
-    "postCreateCommand": "composer install"
+    }
 }

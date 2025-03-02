@@ -1,0 +1,36 @@
+{
+  "name": "@cs498/kubota",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kittiphopklam27/ProjectBu.git"
+  },
+  "issue": {
+    "bugs": {
+      "url": "https://github.com/kittiphopklam27/ProjectBu/issues",
+      "email": "jetsadawijit@outlook.com"
+    }
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Jetsada Wijit <jetsadawijit@outlook.com> (https://jetsadawijit.github.io)",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
