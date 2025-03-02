@@ -3,13 +3,13 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 // Function
-const { ensureFileExists } = require('./utils/fileHandler')
+const { ensureDatabaseExists } = require('./utils/fileHandler')
 
 // Define the file path (data/users.sqlite)
 const filePath = path.join(__dirname, 'data', 'users.sqlite')
 
 // Ensure the file exists
-ensureFileExists(filePath);
+ensureDatabaseExists(filePath);
 
 // App resources
 const app = express();

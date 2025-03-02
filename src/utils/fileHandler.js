@@ -1,19 +1,34 @@
-const fs = require('fs');
+const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
-// Function to ensure the file exists
-function ensureFileExists(filePath, defaultContent = '[]') {
-  const dir = path.dirname(filePath);
+function ensureDatabaseExists(dbPath, tableName, tableSchema) {
+  const dir = path.dirname(dbPath);
 
-  // Create directories along the path if they don't exist
+  // Ensure the directory exists
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
 
-  // Create the file if it doesn't exist
-  if (!fs.existsSync(filePath)) {
-    fs.writeFileSync(filePath, defaultContent, 'utf8');
-  }
+  // Connect to the SQLite database (creates if not exists)
+  const db = new sqlite3.Database(dbPath, (err) => {
+    if (err) {
+      console.error('Error opening database:', err.message);
+    } else {
+      console.log('Connected to SQLite database.');
+      db.run(
+        `CREATE TABLE IF NOT EXISTS ${tableName} (${tableSchema})`,
+        (err) => {
+          if (err) {
+            console.error('Error creating table:', err.message);
+          } else {
+            console.log(`Table '${tableName}' ensured.`);
+          }
+        }
+      );
+    }
+  });
+
+  return db;
 }
 
-module.exports = { ensureFileExists };
+module.exports = { ensureDatabaseExists };
