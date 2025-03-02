@@ -1,0 +1,14 @@
+/* ... (โค้ด CSS เดิม) ... */
+
+.dropdown-content {
+    display: none; /* ซ่อน Dropdown ตอนแรก */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 100%; /* ตำแหน่ง Dropdown ให้แสดงด้านล่างรูปเมนู */
+    left: 0; /* ตำแหน่ง Dropdown ให้ชิดซ้ายของรูปเมนู */
+  }
+  
+  /* ... (โค้ด CSS เดิม) ... */
