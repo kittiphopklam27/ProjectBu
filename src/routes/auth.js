@@ -6,6 +6,10 @@ const router = express.Router();
 
 // Login Route
 router.get("/", (req, res) => {
+  if (req.session.userId) {
+    return res.redirect("/");
+  }
+
   res.render("login");
 });
 
