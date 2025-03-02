@@ -62,6 +62,11 @@ return [
             ]) : [],
         ],
 
+        'json' => [
+            'driver' => 'json',
+            'database' => storage_path('app/users.json'),
+        ],
+
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),
