@@ -3,13 +3,24 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 // Function
-const { ensureDatabaseExists } = require('./utils/fileHandler')
+const { ensureDatabaseExists } = require('./utils/fileHandler');
 
 // Define the file path (data/users.sqlite)
-const filePath = path.join(__dirname, 'data', 'users.sqlite')
+const filePath = path.join(__dirname, 'data', 'users.sqlite');
+
+const  tableName = `user`;
+const tableSchema = `
+  user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_name VARCHAR(255) NOT NULL,
+  user_password VARCHAR(255) NOT NULL,
+  user_role VARCHAR(50) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  user_created_time DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  user_updated_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+`;
 
 // Ensure the file exists
-ensureDatabaseExists(filePath);
+ensureDatabaseExists(filePath, tableName, tableSchema);
 
 // App resources
 const app = express();
