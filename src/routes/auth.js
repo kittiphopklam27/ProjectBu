@@ -17,7 +17,8 @@ router.post("/", async (req, res) => {
     return res.send("Invalid username or password!");
   }
 
-  req.session.userId = user.id;
+  req.session.userId = user.user_id;
+  // console.log("Session after login:", req.session); // Debugging
   res.redirect("/");
 });
 
